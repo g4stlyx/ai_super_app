@@ -1,0 +1,35 @@
+name: ai_super_app
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons:
+  permission_handler:
+  flutter_dotenv:
+  http:
+  path:
+  openai: # for the chat bot
+  image_picker:
+  google_mlkit_image_labeling: # image recognition
+  # real-time language translation
+  speech_to_text:
+  flutter_tts: # Text-to-speech
+  translator: # google translator
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - .env
