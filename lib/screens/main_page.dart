@@ -1,5 +1,6 @@
+import 'package:ai_super_app/screens/chat_bot_gemini.dart';
+// import 'package:ai_super_app/screens/chat_bot_gpt.dart';
 import 'package:flutter/material.dart';
-import 'chat_screen.dart';
 import 'image_recognition_screen.dart';
 import 'translation_screen.dart';
 
@@ -10,7 +11,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AI Assistant'),
+        title: const Text('AI Super App'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Center(
@@ -19,7 +20,7 @@ class MainPage extends StatelessWidget {
           children: [
             ElevatedButton.icon(
               icon: const Icon(Icons.chat),
-              label: const Text('Chat Bot'),
+              label: const Text('Gemini Chat Bot'),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 minimumSize: const Size(200, 50),
@@ -27,10 +28,24 @@ class MainPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ChatScreen()),
+                  MaterialPageRoute(builder: (context) => const GeminiChatScreen()),
                 );
               },
             ),
+            // ElevatedButton.icon(
+            //   icon: const Icon(Icons.chat),
+            //   label: const Text('GPT Chat Bot'),
+            //   style: ElevatedButton.styleFrom(
+            //     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+            //     minimumSize: const Size(200, 50),
+            //   ),
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => const GptChatScreen()),
+            //     );
+            //   },
+            // ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
               icon: const Icon(Icons.image_search),

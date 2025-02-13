@@ -15,9 +15,12 @@ dependencies:
   flutter_dotenv:
   http:
   path:
-  openai: # for the chat bot
+  # chat bots
+  # openai:
+  google_generative_ai: ^0.2.0
+  # image recognition
   image_picker:
-  google_mlkit_image_labeling: # image recognition
+  google_mlkit_image_labeling:
   # real-time language translation
   speech_to_text:
   flutter_tts: # Text-to-speech

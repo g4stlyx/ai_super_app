@@ -1,17 +1,19 @@
-import 'package:flutter/material.dart';
-import '../services/openai_service.dart';
+// ignore_for_file: use_build_context_synchronously
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+import 'package:flutter/material.dart';
+import '../services/gemini_service.dart';
+
+class GeminiChatScreen extends StatefulWidget {
+  const GeminiChatScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<GeminiChatScreen> createState() => _GeminiChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _GeminiChatScreenState extends State<GeminiChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final List<Map<String, String>> _chatHistory = [];
-  final OpenAIService _openAIService = OpenAIService();
+  final GeminiService _geminiService = GeminiService();
   bool _isLoading = false;
 
   void _sendMessage() async {
@@ -29,7 +31,7 @@ class _ChatScreenState extends State<ChatScreen> {
     _messageController.clear();
 
     try {
-      final response = await _openAIService.sendMessage(userMessage);
+      final response = await _geminiService.sendMessage(userMessage);
 
       setState(() {
         _chatHistory.add({
@@ -38,7 +40,6 @@ class _ChatScreenState extends State<ChatScreen> {
         });
       });
     } catch (e) {
-      // Show error message to user
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: $e')),
       );
