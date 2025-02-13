@@ -43,13 +43,13 @@ class TranslationService {
     }
   }
 
-  Future<String> translateText(String text, String targetLanguage) async {
+  Future<String> translateText(String text, String sourceLanguage, String targetLanguage) async {
     if (text.isEmpty) return '';
 
     try {
       final translation = await _translator.translate(
         text,
-        from: 'en',
+        from: sourceLanguage,
         to: targetLanguage,
       );
       return translation.text;

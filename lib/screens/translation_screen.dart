@@ -18,6 +18,22 @@ class _TranslationScreenState extends State<TranslationScreen> {
   String _translatedText = "";
   bool _isLoading = false;
   bool _isInitialized = false;
+  String _sourceLanguage = 'en';
+  String _targetLanguage = 'es';
+
+  final Map<String, String> _languages = {
+    'tr': 'Turkish',
+    'en': 'English',
+    'es': 'Spanish',
+    'fr': 'French',
+    'de': 'German',
+    'it': 'Italian',
+    'pt': 'Portuguese',
+    'ru': 'Russian',
+    'zh': 'Chinese',
+    'ja': 'Japanese',
+    'ko': 'Korean',
+  };
 
   @override
   void initState() {
@@ -94,7 +110,11 @@ class _TranslationScreenState extends State<TranslationScreen> {
   Future<void> _translateText(String text) async {
     setState(() => _isLoading = true);
     try {
-      final translatedText = await _translationService.translateText(text, 'es');
+      final translatedText = await _translationService.translateText(
+        text,
+        _sourceLanguage,
+        _targetLanguage,
+      );
       setState(() => _translatedText = translatedText);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -107,7 +127,9 @@ class _TranslationScreenState extends State<TranslationScreen> {
 
   Future<void> _speak() async {
     try {
-      await _translationService.speak(_translatedText, 'es-ES');
+      // Map language codes to TTS format
+      final ttsLanguage = '$_targetLanguage-${_targetLanguage.toUpperCase()}';
+      await _translationService.speak(_translatedText, ttsLanguage);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Speech error: $e')),
@@ -127,6 +149,47 @@ class _TranslationScreenState extends State<TranslationScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                DropdownButton<String>(
+                  value: _sourceLanguage,
+                  items: _languages.entries.map((entry) {
+                    return DropdownMenuItem(
+                      value: entry.key,
+                      child: Text(entry.value),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    if (value != null) {
+                      setState(() => _sourceLanguage = value);
+                      if (_originalText != "Press the button & start speaking") {
+                        _translateText(_originalText);
+                      }
+                    }
+                  },
+                ),
+                const Icon(Icons.arrow_forward),
+                DropdownButton<String>(
+                  value: _targetLanguage,
+                  items: _languages.entries.map((entry) {
+                    return DropdownMenuItem(
+                      value: entry.key,
+                      child: Text(entry.value),
+                    );
+                  }).toList(),
+                  onChanged: (String? value) {
+                    if (value != null) {
+                      setState(() => _targetLanguage = value);
+                      if (_originalText != "Press the button & start speaking") {
+                        _translateText(_originalText);
+                      }
+                    }
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
             Text(
               "Original: $_originalText",
               style: const TextStyle(fontSize: 18),
