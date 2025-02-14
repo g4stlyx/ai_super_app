@@ -70,6 +70,61 @@ class TranslationService {
     }
   }
 
+  Future<String> translateDocument(String documentText, String sourceLanguage, String targetLanguage) async {
+    if (documentText.isEmpty) return '';
+
+    try {
+      // Split the document into smaller chunks to avoid translation API limits
+      final chunks = _splitIntoChunks(documentText, 1000); // Split into 1000 character chunks
+      final translatedChunks = <String>[];
+
+      // Translate each chunk
+      for (final chunk in chunks) {
+        if (chunk.trim().isNotEmpty) {
+          final translatedText = await translateText(
+            chunk,
+            sourceLanguage,
+            targetLanguage,
+          );
+          translatedChunks.add(translatedText);
+
+          // Add a small delay to avoid rate limiting
+          await Future.delayed(const Duration(milliseconds: 100));
+        }
+      }
+
+      // Join the translated chunks back together
+      return translatedChunks.join(' ');
+    } catch (e) {
+      print('Document translation error: $e');
+      throw Exception('Document translation failed: $e');
+    }
+  }
+
+  List<String> _splitIntoChunks(String text, int chunkSize) {
+    final chunks = <String>[];
+    final sentences = text.split(RegExp(r'(?<=[.!?])\s+'));
+
+    String currentChunk = '';
+
+    for (final sentence in sentences) {
+      if ((currentChunk + sentence).length > chunkSize) {
+        if (currentChunk.isNotEmpty) {
+          chunks.add(currentChunk.trim());
+        }
+        currentChunk = sentence;
+      } else {
+        currentChunk += (currentChunk.isEmpty ? '' : ' ') + sentence;
+      }
+    }
+
+    if (currentChunk.isNotEmpty) {
+      chunks.add(currentChunk.trim());
+    }
+
+    return chunks;
+  }
+
   bool get isListening => _speech.isListening;
   bool get isInitialized => _isInitialized;
 }

@@ -26,6 +26,12 @@ dependencies:
   speech_to_text:
   flutter_tts: # Text-to-speech
   translator: # google translator
+  # document translation
+  file_picker:
+  read_pdf_text:
+
+
+  
 
 dev_dependencies:
   flutter_test:
