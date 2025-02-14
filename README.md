@@ -3,8 +3,6 @@ aint super yet.
 
 * TODO: more ai-related stuff
 
-* TODO: maybe storing chat history in local? (sqlite)
-
 # how to use
 create a .env file which should contain:
 

@@ -13,6 +13,7 @@ dependencies:
   cupertino_icons:
   permission_handler:
   flutter_dotenv:
+  shared_preferences:
   http:
   path:
   # chat bots
