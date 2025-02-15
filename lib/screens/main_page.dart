@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'image_recognition_screen.dart';
 import 'translation_screen.dart';
 import 'document_translation_screen.dart';
+import 'emotion_recognition_screen.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -33,20 +34,6 @@ class MainPage extends StatelessWidget {
                 );
               },
             ),
-            // ElevatedButton.icon(
-            //   icon: const Icon(Icons.chat),
-            //   label: const Text('GPT Chat Bot'),
-            //   style: ElevatedButton.styleFrom(
-            //     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-            //     minimumSize: const Size(200, 50),
-            //   ),
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(builder: (context) => const GptChatScreen()),
-            //     );
-            //   },
-            // ),
             const SizedBox(height: 20),
             ElevatedButton.icon(
               icon: const Icon(Icons.image_search),
@@ -89,6 +76,21 @@ class MainPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const DocumentTranslationScreen()),
+                );
+              },
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.sentiment_satisfied),
+              label: const Text('Emotion Recognition'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                minimumSize: const Size(200, 50),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EmotionRecognitionScreen()),
                 );
               },
             ),

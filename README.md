@@ -1,6 +1,9 @@
 # ai_super_app
 aint super yet.
 
+* TODO: in emotion recignition, current package is too simple. A way more advanced python API could be written, and it wouldnt be too hard.
+* TODO: in emotion recignition, add camera option.
+
 * TODO: more ai-related stuff:
 ```
 1. Voice Assistant / Speech Recognition

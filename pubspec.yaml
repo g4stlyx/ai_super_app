@@ -29,14 +29,19 @@ dependencies:
   # document translation
   file_picker:
   read_pdf_text:
-
-
-  
+  # emotion recignition
+  face_emotion_detector:
+  google_mlkit_smart_reply:
+  #
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+
+# dependency_overrides:
+#   google_mlkit_barcode_scanning:
+#     path: local_packages/google_mlkit_barcode_scanning10
 
 flutter:
   uses-material-design: true
