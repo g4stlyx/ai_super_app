@@ -22,6 +22,7 @@ dependencies:
   # image recognition
   image_picker:
   google_mlkit_image_labeling:
+  google_mlkit_smart_reply:
   # real-time language translation
   speech_to_text:
   flutter_tts: # Text-to-speech
@@ -29,10 +30,6 @@ dependencies:
   # document translation
   file_picker:
   read_pdf_text:
-  # emotion recignition
-  face_emotion_detector:
-  google_mlkit_smart_reply:
-  #
 
 dev_dependencies:
   flutter_test:

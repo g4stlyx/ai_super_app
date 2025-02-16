@@ -15,7 +15,7 @@ aint super yet.
 
 3. Face Detection & Analysis
     ***Emotion recognition                  ***ADDED***  
-    **Age/gender estimation
+    **Age/gender estimation                 ***ADDED*** 
     Face filters
     Face matching/similarity
 

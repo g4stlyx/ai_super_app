@@ -3,18 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import '../services/emotion_recognition_service.dart';
+import '../services/face_analysis_service.dart';
 
-class EmotionRecognitionScreen extends StatefulWidget {
-  const EmotionRecognitionScreen({super.key});
+class FaceAnalysisScreen extends StatefulWidget {
+  const FaceAnalysisScreen({super.key});
 
   @override
-  _EmotionRecognitionScreenState createState() => _EmotionRecognitionScreenState();
+  _FaceAnalysisScreenState createState() => _FaceAnalysisScreenState();
 }
 
-class _EmotionRecognitionScreenState extends State<EmotionRecognitionScreen> {
-  final EmotionRecognitionService _service = EmotionRecognitionService();
+class _FaceAnalysisScreenState extends State<FaceAnalysisScreen> {
+  final FaceAnalysisService _service = FaceAnalysisService();
   String _recognizedEmotion = 'No emotion recognized';
+  String _gender = 'Unknown';
+  String _age = 'Unknown';
   File? _image;
 
   Future<void> _pickImage(ImageSource source) async {
@@ -25,15 +27,23 @@ class _EmotionRecognitionScreenState extends State<EmotionRecognitionScreen> {
       setState(() {
         _image = File(pickedFile.path);
       });
-      _recognizeEmotion();
+      _analyzeFace();
     }
   }
 
-  Future<void> _recognizeEmotion() async {
+  Future<void> _analyzeFace() async {
     if (_image != null) {
-      String emotion = await _service.recognizeEmotionFromImage(_image!);
+      var analysisResult = await _service.analyzeFace(_image!);
       setState(() {
-        _recognizedEmotion = emotion;
+        if (analysisResult.containsKey('error')) {
+          _recognizedEmotion = analysisResult['error'];
+          _gender = 'Unknown';
+          _age = 'Unknown';
+        } else {
+          _recognizedEmotion = analysisResult['topEmotion'];
+          _gender = analysisResult['gender'];
+          _age = analysisResult['age'].toString();
+        }
       });
     }
   }
@@ -52,6 +62,14 @@ class _EmotionRecognitionScreenState extends State<EmotionRecognitionScreen> {
             const SizedBox(height: 20),
             Text(
               _recognizedEmotion,
+              style: const TextStyle(fontSize: 24),
+            ),
+            Text(
+              'Gender: $_gender',
+              style: const TextStyle(fontSize: 24),
+            ),
+            Text(
+              'Age: $_age',
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 20),

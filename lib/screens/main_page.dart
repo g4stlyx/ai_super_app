@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'image_recognition_screen.dart';
 import 'translation_screen.dart';
 import 'document_translation_screen.dart';
-import 'emotion_recognition_screen.dart';
+import 'face_analysis_screen.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -82,7 +82,7 @@ class MainPage extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton.icon(
               icon: const Icon(Icons.sentiment_satisfied),
-              label: const Text('Emotion Recognition'),
+              label: const Text('Face Analysis'),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 minimumSize: const Size(200, 50),
@@ -90,7 +90,7 @@ class MainPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const EmotionRecognitionScreen()),
+                  MaterialPageRoute(builder: (context) => const FaceAnalysisScreen()),
                 );
               },
             ),
