@@ -1,9 +1,6 @@
 # ai_super_app
 aint super yet.
 
-* TODO: in emotion recignition, current package is too simple. A way more advanced python API could be written, and it wouldnt be too hard.
-* TODO: in emotion recignition, add camera option.
-
 * TODO: more ai-related stuff:
 ```
 1. Voice Assistant / Speech Recognition
@@ -17,7 +14,7 @@ aint super yet.
     ***Document translator (combine with your translation feature)  ***ADDED***    
 
 3. Face Detection & Analysis
-    ***Emotion recognition
+    ***Emotion recognition                  ***ADDED***  
     **Age/gender estimation
     Face filters
     Face matching/similarity

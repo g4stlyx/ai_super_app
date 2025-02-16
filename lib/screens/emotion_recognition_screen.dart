@@ -17,9 +17,9 @@ class _EmotionRecognitionScreenState extends State<EmotionRecognitionScreen> {
   String _recognizedEmotion = 'No emotion recognized';
   File? _image;
 
-  Future<void> _pickImage() async {
+  Future<void> _pickImage(ImageSource source) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: source);
 
     if (pickedFile != null) {
       setState(() {
@@ -55,9 +55,19 @@ class _EmotionRecognitionScreenState extends State<EmotionRecognitionScreen> {
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _pickImage,
-              child: const Text('Pick an Image'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => _pickImage(ImageSource.gallery),
+                  child: const Text('Pick from Gallery'),
+                ),
+                const SizedBox(width: 20),
+                ElevatedButton(
+                  onPressed: () => _pickImage(ImageSource.camera),
+                  child: const Text('Capture with Camera'),
+                ),
+              ],
             ),
           ],
         ),

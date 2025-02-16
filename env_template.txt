@@ -1,0 +1,11 @@
+# OPENAI API
+OPENAI_API_KEY=
+
+# GEMINI
+GEMINI_API_KEY=
+
+# FACEPLUSPLUS (for emotion recignition - and other face stuff if necessary -)
+FACE_PLUS_PLUS_API_KEY=
+FACE_PLUS_PLUS_API_SECRET=
+
+#
